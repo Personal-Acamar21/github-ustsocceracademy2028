@@ -1,18 +1,26 @@
 export interface Event {
+  id: string;
   title: string;
   image: string;
   startDate: string;
   endDate: string;
   venue: string;
   description: string;
-  type: 'Tournament' | 'Camp' | 'Clinic' | 'Tryout' | 'Special Event';
+  type: 'Tournament' | 'Camp' | 'Clinic' | 'Training' | 'Tryout' | 'Special Event';
   ageGroups: string[];
   price: {
     amount: number;
     currency: string;
   };
+  schedule: {
+    dates: string[];
+    times: {
+      group?: string;
+      time: string;
+    }[];
+  }[];
   features: string[];
-  coaches: {
+  coaches?: {
     name: string;
     role: string;
     image: string;
@@ -21,6 +29,7 @@ export interface Event {
   maxParticipants: number;
   registrationDeadline: string;
   status: 'upcoming' | 'ongoing' | 'completed';
+  registeredCount?: number;
 }
 
 export interface Sponsor {
