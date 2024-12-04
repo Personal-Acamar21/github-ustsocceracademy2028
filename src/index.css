@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-green: #8ED204;
+}
+
+/* Hide scrollbar for all elements */
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+*::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow: hidden;
+}
+
+body {
+  @apply antialiased;
+  overflow-y: auto;
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+}
+
+#root {
+  height: 100%;
+  overflow-y: auto;
+}
+
+/* Custom styles for brand colors */
+.text-brand {
+  color: var(--brand-green);
+}
+
+.bg-brand {
+  background-color: var(--brand-green);
+}
+
+.hover\:text-brand:hover {
+  color: var(--brand-green);
+}
+
+.hover\:bg-brand:hover {
+  background-color: var(--brand-green);
+}

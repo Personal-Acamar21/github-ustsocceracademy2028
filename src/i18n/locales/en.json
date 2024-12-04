@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "academy": "Academy",
+    "aboutUs": "About Us",
+    "ourTeams": "Our Teams",
+    "tryouts": "Tryouts",
+    "cozyFeet": "Cozy Feet",
+    "ustCares": "UST Cares",
+    "ourStaff": "Our Staff",
+    "campsClinics": "Camps & Clinics",
+    "facilities": "Facilities",
+    "shop": "Shop Diaza",
+    "sponsors": "Sponsors",
+    "contact": "Contact Us"
+  },
+  "hero": {
+    "title": "Develop Your Soccer Skills",
+    "subtitle": "Shape Your Future",
+    "description": "Join the premier youth soccer academy where champions are made through dedication, skill, and passion.",
+    "cta": "Join Now"
+  }
+}

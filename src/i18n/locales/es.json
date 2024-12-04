@@ -1,0 +1,22 @@
+{
+  "nav": {
+    "academy": "Academia",
+    "aboutUs": "Sobre Nosotros",
+    "ourTeams": "Nuestros Equipos",
+    "tryouts": "Pruebas",
+    "cozyFeet": "Cozy Feet",
+    "ustCares": "UST Cares",
+    "ourStaff": "Nuestro Personal",
+    "campsClinics": "Campamentos y Clínicas",
+    "facilities": "Instalaciones",
+    "shop": "Tienda Diaza",
+    "sponsors": "Patrocinadores",
+    "contact": "Contáctenos"
+  },
+  "hero": {
+    "title": "Desarrolla tus Habilidades",
+    "subtitle": "Forma tu Futuro",
+    "description": "Únete a la academia de fútbol premier donde se forman campeones a través de la dedicación, la habilidad y la pasión.",
+    "cta": "Únete Ahora"
+  }
+}

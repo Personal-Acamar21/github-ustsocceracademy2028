@@ -1,0 +1,30 @@
+{
+  "programs": [
+    {
+      "title": "Cozy Feet",
+      "description": "Early development program for ages 2-7",
+      "icon": "Star",
+      "ageRange": "2-7 years",
+      "features": [
+        "Age-appropriate training",
+        "Fun learning environment",
+        "Basic motor skills development",
+        "Introduction to soccer fundamentals"
+      ],
+      "order": 1
+    },
+    {
+      "title": "UST Pre-Academy",
+      "description": "Advanced training for ages 7-11",
+      "icon": "Trophy",
+      "ageRange": "7-11 years",
+      "features": [
+        "Technical skill development",
+        "Small-sided games",
+        "Professional coaching",
+        "Regular progress assessments"
+      ],
+      "order": 2
+    }
+  ]
+}

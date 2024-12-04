@@ -1,0 +1,106 @@
+backend:
+  name: git-gateway
+  branch: main
+  repo: Acamar21/ust-academy
+  site_domain: ust-academy.com
+  commit_messages:
+    create: 'Create {{collection}} "{{slug}}"'
+    update: 'Update {{collection}} "{{slug}}"'
+    delete: 'Delete {{collection}} "{{slug}}"'
+    uploadMedia: '[skip ci] Upload "{{path}}"'
+    deleteMedia: '[skip ci] Delete "{{path}}"'
+
+local_backend: true
+
+media_folder: "public/images/uploads"
+public_folder: "/images/uploads"
+
+publish_mode: editorial_workflow
+
+site_url: https://ust-academy.com
+display_url: https://ust-academy.com
+
+collections:
+  - name: "events"
+    label: "Events"
+    folder: "content/events"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Start Date", name: "startDate", widget: "datetime" }
+      - { label: "End Date", name: "endDate", widget: "datetime" }
+      - { label: "Venue", name: "venue", widget: "string" }
+      - { label: "Description", name: "description", widget: "markdown" }
+      - {
+          label: "Event Type",
+          name: "type",
+          widget: "select",
+          options: ["Tournament", "Camp", "Clinic", "Tryout", "Special Event"]
+        }
+      - {
+          label: "Age Groups",
+          name: "ageGroups",
+          widget: "list",
+          field: { label: "Age Group", name: "ageGroup", widget: "string" }
+        }
+      - {
+          label: "Price",
+          name: "price",
+          widget: "object",
+          fields: [
+            { label: "Amount", name: "amount", widget: "number" },
+            { label: "Currency", name: "currency", widget: "select", options: ["USD"], default: "USD" }
+          ]
+        }
+      - {
+          label: "Features",
+          name: "features",
+          widget: "list",
+          field: { label: "Feature", name: "feature", widget: "string" }
+        }
+      - { label: "Maximum Participants", name: "maxParticipants", widget: "number" }
+      - { label: "Registration Deadline", name: "registrationDeadline", widget: "datetime" }
+      - { label: "Status", name: "status", widget: "select", options: ["upcoming", "ongoing", "completed"] }
+
+  - name: "blog"
+    label: "Blog"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Featured Image", name: "featuredImage", widget: "image" }
+      - { label: "Author", name: "author", widget: "string" }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Category", name: "category", widget: "string" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Content", name: "content", widget: "markdown" }
+
+  - name: "testimonials"
+    label: "Testimonials"
+    folder: "content/testimonials"
+    create: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role", name: "role", widget: "select", options: ["Parent", "Player", "Coach"] }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Content", name: "content", widget: "text" }
+      - { label: "Program", name: "program", widget: "string" }
+      - { label: "Featured", name: "featured", widget: "boolean", default: false }
+      - { label: "Order", name: "order", widget: "number", default: 0 }
+
+  - name: "coaches"
+    label: "Coaches"
+    folder: "content/coaches"
+    create: true
+    fields:
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Role", name: "role", widget: "string" }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Credentials", name: "credentials", widget: "string" }
+      - { label: "Experience", name: "experience", widget: "string" }
+      - { label: "Bio", name: "bio", widget: "markdown" }
+      - { label: "Order", name: "order", widget: "number", default: 0 }
