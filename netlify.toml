@@ -38,4 +38,4 @@
   status = 200
 
 [[plugins]]
-package = "netlify-plugin-submit-sitemap"
+  package = "netlify-plugin-submit-sitemap"
