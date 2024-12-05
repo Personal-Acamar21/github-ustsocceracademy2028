@@ -19,8 +19,8 @@ const EVENTS_DATA: Event[] = [
       currency: "USD"
     },
     schedule: [
-      { dates: ["12/14", "12/21", "1/11", "1/25", "2/2", "2/8", "3/1", "3/8", "3/22"] },
-      { times: [
+      { dates: ["12/14", "12/21", "1/11", "1/25", "2/2", "2/8", "3/1", "3/8", "3/22"], times: [] },
+      { dates: [], times: [
         { group: "2017-2013", time: "5:30-7PM" },
         { group: "2012-2008", time: "7PM-8:30PM" }
       ]}
@@ -34,109 +34,25 @@ const EVENTS_DATA: Event[] = [
       "Physical conditioning"
     ],
     registrationDeadline: "2024-12-13"
-  },
-  {
-    id: 'winter-intramural-training',
-    title: "UST WINTER INTRAMURAL TRAINING",
-    description: "Winter intramural training program for boys and girls born 2021-2017",
-    type: "Training",
-    status: "upcoming",
-    image: "https://storage.googleapis.com/msgsndr/AKZP7FbfcOPsLo93Ayuw/media/673b8a9115ee066c37b605ad.png",
-    venue: "Christ Lutheran Church, 189 Burr Rd, East Northport, NY",
-    startDate: "2024-12-14",
-    endDate: "2024-03-22",
-    ageGroups: ["2021-2017"],
-    price: {
-      amount: 175,
-      currency: "USD"
-    },
-    schedule: [
-      { dates: ["12/14", "12/21", "1/11", "1/25", "2/2", "2/8", "3/1", "3/8", "3/22"] },
-      { times: [{ time: "10AM-11AM" }] }
-    ],
-    maxParticipants: 30,
-    features: [
-      "Age-appropriate training",
-      "Fun learning environment",
-      "Basic skill development",
-      "Introduction to soccer fundamentals"
-    ],
-    registrationDeadline: "2024-12-13"
-  },
-  {
-    id: 'fall-intense-clinic',
-    title: "UST FALL INTENSE CLINIC",
-    description: "Fall intensive training program for boys and girls born 2017-2008",
-    type: "Clinic",
-    status: "upcoming",
-    image: "https://storage.googleapis.com/msgsndr/AKZP7FbfcOPsLo93Ayuw/media/673bd75015ee065bf0b64cad.png",
-    venue: "Christ Lutheran Church, 189 Burr Rd, East Northport, NY",
-    startDate: "2024-09-21",
-    endDate: "2024-11-16",
-    ageGroups: ["2017-2013", "2012-2008"],
-    price: {
-      amount: 325,
-      currency: "USD"
-    },
-    schedule: [
-      { dates: ["9/21", "9/28", "10/19", "10/26", "11/2", "11/9", "11/16"] },
-      { times: [
-        { group: "2017-2013", time: "5:30PM-7PM" },
-        { group: "2012-2008", time: "7PM-8:30PM" }
-      ]}
-    ],
-    maxParticipants: 30,
-    features: [
-      "Professional coaching staff",
-      "Technical training",
-      "Tactical development",
-      "Physical conditioning"
-    ],
-    registrationDeadline: "2024-09-20"
-  },
-  {
-    id: 'fall-intramural-program',
-    title: "UST FALL INTRAMURAL PROGRAM",
-    description: "Fall intramural program for boys and girls born 2021-2016",
-    type: "Training",
-    status: "upcoming",
-    image: "https://storage.googleapis.com/msgsndr/AKZP7FbfcOPsLo93Ayuw/media/673b8a9115ee066c37b605ad.png",
-    venue: "Christ Lutheran Church, 189 Burr Rd, East Northport, NY",
-    startDate: "2024-09-12",
-    endDate: "2024-11-07",
-    ageGroups: ["2021-2019", "2018-2016"],
-    price: {
-      amount: 175,
-      currency: "USD"
-    },
-    schedule: [
-      { dates: ["9/12", "9/19", "9/26", "10/10", "10/17", "10/24", "11/7"] },
-      { times: [
-        { group: "2021-2019", time: "5PM-5:45PM" },
-        { group: "2018-2016", time: "5pm-6pm" }
-      ]}
-    ],
-    maxParticipants: 30,
-    features: [
-      "Age-appropriate training",
-      "Fun learning environment",
-      "Basic skill development",
-      "Introduction to soccer fundamentals"
-    ],
-    registrationDeadline: "2024-09-11"
   }
 ];
 
 export function useEvents() {
-  return useQuery({
+  return useQuery<Event[], Error>({
     queryKey: ['events'],
     queryFn: () => Promise.resolve(EVENTS_DATA),
     staleTime: 5 * 60 * 1000, // 5 minutes
   });
 }
 
+async function fetchContent<T>(collection: string): Promise<T[]> {
+  const response = await fetch(`/api/content/${collection}`);
+  if (!response.ok) throw new Error(`Failed to fetch ${collection}`);
+  return response.json();
+}
+
 export function useSponsors() {
-  return useQuery({
+  return useQuery<Sponsor[], Error>({
     queryKey: ['sponsors'],
     queryFn: () => fetchContent<Sponsor>('sponsors'),
     staleTime: 5 * 60 * 1000,
@@ -144,7 +60,7 @@ export function useSponsors() {
 }
 
 export function useCampsClinics() {
-  return useQuery({
+  return useQuery<CampClinic[], Error>({
     queryKey: ['camps-clinics'],
     queryFn: () => fetchContent<CampClinic>('camps-clinics'),
     staleTime: 5 * 60 * 1000,
@@ -152,7 +68,7 @@ export function useCampsClinics() {
 }
 
 export function useTryouts() {
-  return useQuery({
+  return useQuery<Tryout[], Error>({
     queryKey: ['tryouts'],
     queryFn: () => fetchContent<Tryout>('tryouts'),
     staleTime: 5 * 60 * 1000,
@@ -173,10 +89,4 @@ export function getActiveSponsors(sponsors: Sponsor[]) {
 export function getUpcomingTryouts(tryouts: Tryout[]) {
   return tryouts.filter(tryout => tryout.status === 'upcoming')
     .sort((a, b) => new Date(a.dates[0].date).getTime() - new Date(b.dates[0].date).getTime());
-}
-
-async function fetchContent<T>(collection: string): Promise<T[]> {
-  const response = await fetch(`/api/content/${collection}`);
-  if (!response.ok) throw new Error(`Failed to fetch ${collection}`);
-  return response.json();
 }
