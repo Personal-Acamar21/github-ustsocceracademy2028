@@ -15,7 +15,7 @@ export interface BlogPost {
 }
 
 export function useBlogPosts() {
-  return useQuery({
+  return useQuery<BlogPost[], Error>({
     queryKey: ['posts'],
     queryFn: getPosts,
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -24,7 +24,7 @@ export function useBlogPosts() {
 }
 
 export function useBlogPost(slug: string) {
-  return useQuery({
+  return useQuery<BlogPost | null, Error>({
     queryKey: ['post', slug],
     queryFn: () => getPost(slug),
     enabled: !!slug,
