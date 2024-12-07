@@ -20,8 +20,8 @@ const OutdoorFacilities = React.lazy(() => import('./pages/OutdoorFacilities'));
 const ShopDaza = React.lazy(() => import('./pages/ShopDaza'));
 const Sponsors = React.lazy(() => import('./pages/Sponsors'));
 const Contact = React.lazy(() => import('./pages/Contact'));
-const Blog = React.lazy(() => import('./pages/Blog'));
-const BlogPost = React.lazy(() => import('./pages/BlogPost'));
+const News = React.lazy(() => import('./pages/News'));
+const NewsPost = React.lazy(() => import('./pages/NewsPost'));
 const Newsletter = React.lazy(() => import('./pages/Newsletter'));
 const Testimonials = React.lazy(() => import('./pages/Testimonials'));
 const Events = React.lazy(() => import('./pages/Events'));
@@ -29,6 +29,10 @@ const EventDetails = React.lazy(() => import('./pages/EventDetails'));
 const EventRegistration = React.lazy(() => import('./pages/EventRegistration'));
 const PhotoGallery = React.lazy(() => import('./pages/PhotoGallery'));
 const TeamPage = React.lazy(() => import('./pages/TeamPage'));
+const Schedule = React.lazy(() => import('./pages/Schedule'));
+const WinterSkillClinic = React.lazy(() => import('./pages/WinterSkillClinic'));
+const WinterIntramuralTraining = React.lazy(() => import('./pages/WinterIntramuralTraining'));
+const FinancialAid = React.lazy(() => import('./pages/FinancialAid'));
 
 const App: React.FC = () => {
   return (
@@ -51,8 +55,8 @@ const App: React.FC = () => {
               <Route path="/shop" element={<ShopDaza />} />
               <Route path="/sponsors" element={<Sponsors />} />
               <Route path="/contact" element={<Contact />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/news" element={<News />} />
+              <Route path="/news/:slug" element={<NewsPost />} />
               <Route path="/newsletters" element={<Newsletter />} />
               <Route path="/testimonials" element={<Testimonials />} />
               <Route path="/events" element={<Events />} />
@@ -60,6 +64,10 @@ const App: React.FC = () => {
               <Route path="/events/:id/register" element={<EventRegistration />} />
               <Route path="/gallery" element={<PhotoGallery />} />
               <Route path="/team/:teamId" element={<TeamPage />} />
+              <Route path="/schedule" element={<Schedule />} />
+              <Route path="/winter-skill-clinic" element={<WinterSkillClinic />} />
+              <Route path="/winter-intramural-training" element={<WinterIntramuralTraining />} />
+              <Route path="/financial-aid" element={<FinancialAid />} />
             </Routes>
           </Suspense>
         </main>
