@@ -7,39 +7,43 @@ import Button from '../components/Button';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { showSuccess } from '../utils/toast';
 
-interface RegistrationForm {
+interface EmergencyContact {
+  name: string;
+  phone: string;
+  relationship: string;
+}
+
+interface RegistrationFormData {
   playerName: string;
   dateOfBirth: string;
   parentName: string;
   email: string;
   phone: string;
-  emergencyContact: {
-    name: string;
-    phone: string;
-    relationship: string;
-  };
+  emergencyContact: EmergencyContact;
   medicalInfo: string;
   waiverAccepted: boolean;
 }
 
+const initialFormData: RegistrationFormData = {
+  playerName: '',
+  dateOfBirth: '',
+  parentName: '',
+  email: '',
+  phone: '',
+  emergencyContact: {
+    name: '',
+    phone: '',
+    relationship: ''
+  },
+  medicalInfo: '',
+  waiverAccepted: false
+};
+
 export default function EventRegistration() {
-  const { id } = useParams<{ id: string }>();
+  const { id } = useParams();
   const navigate = useNavigate();
   const { data: events = [], isLoading, error } = useEvents();
-  const [formData, setFormData] = useState<RegistrationForm>({
-    playerName: '',
-    dateOfBirth: '',
-    parentName: '',
-    email: '',
-    phone: '',
-    emergencyContact: {
-      name: '',
-      phone: '',
-      relationship: ''
-    },
-    medicalInfo: '',
-    waiverAccepted: false
-  });
+  const [formData, setFormData] = useState<RegistrationFormData>(initialFormData);
 
   if (isLoading) return <LoadingSpinner size="large" />;
   if (error) return <div>Error loading event details</div>;
@@ -93,7 +97,7 @@ export default function EventRegistration() {
         <meta name="description" content={`Register for ${event.title} at UST Soccer Academy`} />
       </Helmet>
 
-      {/* Rest of the JSX remains the same */}
+      {/* Rest of the component remains the same */}
     </>
   );
 }
