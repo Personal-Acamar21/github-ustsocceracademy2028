@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { getPosts, getPost } from '../lib/api';
 
-export interface BlogPost {
+export interface NewsPost {
   id: string;
   title: string;
   slug: string;
@@ -14,8 +14,8 @@ export interface BlogPost {
   tags: string[];
 }
 
-export function useBlogPosts() {
-  return useQuery<BlogPost[], Error>({
+export function useNewsPosts() {
+  return useQuery({
     queryKey: ['posts'],
     queryFn: getPosts,
     staleTime: 5 * 60 * 1000, // 5 minutes
@@ -23,8 +23,8 @@ export function useBlogPosts() {
   });
 }
 
-export function useBlogPost(slug: string) {
-  return useQuery<BlogPost | null, Error>({
+export function useNewsPost(slug: string) {
+  return useQuery({
     queryKey: ['post', slug],
     queryFn: () => getPost(slug),
     enabled: !!slug,
