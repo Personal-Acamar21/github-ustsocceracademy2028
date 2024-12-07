@@ -4,30 +4,30 @@ import { Helmet } from 'react-helmet-async';
 import { format } from 'date-fns';
 import { ArrowLeft } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { useBlogPost } from '../hooks/useBlog';
+import { useNewsPost } from '../hooks/useNews';
 import LoadingSpinner from '../components/LoadingSpinner';
 
-export default function BlogPost() {
+export default function NewsPost() {
   const { slug = '' } = useParams();
-  const { data: post, isLoading, error } = useBlogPost(slug);
+  const { data: post, isLoading, error } = useNewsPost(slug);
 
   if (isLoading) return <LoadingSpinner />;
-  if (error || !post) return <div>Error loading blog post</div>;
+  if (error || !post) return <div>Error loading news post</div>;
 
   return (
     <>
       <Helmet>
-        <title>{post.title} - UST Soccer Academy Blog</title>
+        <title>{post.title} - UST Soccer Academy News</title>
         <meta name="description" content={post.excerpt} />
       </Helmet>
 
       <div className="container mx-auto px-4 py-16">
         <Link 
-          to="/blog"
-          className="inline-flex items-center text-[#00FF00] hover:text-[#00FF00]/80 mb-8"
+          to="/news"
+          className="inline-flex items-center text-[#8ED204] hover:text-[#8ED204]/80 mb-8"
         >
           <ArrowLeft className="h-4 w-4 mr-2" />
-          Back to Blog
+          Back to News
         </Link>
 
         <motion.article
@@ -44,13 +44,17 @@ export default function BlogPost() {
           <div className="mb-6">
             <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
             <div className="flex items-center text-gray-600">
-              <span>{format(new Date(post.date), 'MMMM d, yyyy')}</span>
-              <span className="mx-2">•</span>
+              {post.date && (
+                <>
+                  <span>{format(new Date(post.date), 'MMMM d, yyyy')}</span>
+                  <span className="mx-2">•</span>
+                </>
+              )}
               <span>{post.author}</span>
             </div>
           </div>
 
-          <div className="prose max-w-none">
+          <div className="prose max-w-none whitespace-pre-wrap">
             {post.content}
           </div>
 
